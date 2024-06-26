@@ -24,7 +24,7 @@
     "myProducts": {
       "searchMethods": {
         "searchMethod1": {
-          "embedder": "openAIEmbed"
+          "embedder": "miniLMEmbed"
         }
       }
     }
