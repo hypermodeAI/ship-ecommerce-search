@@ -45,16 +45,30 @@ export function getProduct(name: string): string {
 }
 
 export function computeSimilarityBetweenProducts(
-  key1: string,
-  key2: string,
+  name1: string,
+  name2: string,
 ): f64 {
-  return collections.computeSimilarity(myProducts, searchMethod, key1, key2)
+  return collections.computeSimilarity(myProducts, searchMethod, name1, name2)
     .score;
 }
 
 export function searchProducts(
-  product: string,
+  description: string,
   maxItems: i32,
 ): collections.CollectionSearchResult {
-  return collections.search(myProducts, searchMethod, product, maxItems, true);
+  return collections.search(
+    myProducts,
+    searchMethod,
+    description,
+    maxItems,
+    true,
+  );
+}
+
+export function recomputeProductIndex(): string {
+  const response = collections.recomputeSearchMethod(myProducts, searchMethod);
+  if (!response.isSuccessful) {
+    throw new Error(response.error);
+  }
+  return response.status;
 }
